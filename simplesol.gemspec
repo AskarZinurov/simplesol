@@ -8,9 +8,13 @@ Gem::Specification.new do |gem|
   gem.version       = Simplesol::VERSION
   gem.authors       = ["Askar Zinurov"]
   gem.email         = ["mail@asktim.ru"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{SimpleSol service client gem}
+  gem.summary       = %q{Gem for working with sms.simplesol.ru}
   gem.homepage      = ""
+  
+  gem.add_development_dependency 'bundler'
+  gem.add_development_dependency 'rspec'
+  gem.add_runtime_dependency 'faraday'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
