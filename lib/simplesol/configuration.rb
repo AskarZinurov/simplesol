@@ -7,7 +7,7 @@ module Simplesol
     DEFAULT_LOGIN    = nil
     DEFAULT_API_KEY = nil
     DEFAULT_DEBUG    = true
-    DEFAULT_API_SERVER = 'api.sms.simplesol.ru'
+    DEFAULT_API_SERVER = 'http://api.sms.simplesol.ru'
 
     attr_accessor *VALID_OPTIONS_KEYS
 

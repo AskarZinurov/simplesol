@@ -1,0 +1,2 @@
+require 'simplesol'
+require 'rspec'
