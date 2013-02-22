@@ -1,6 +1,7 @@
 require "faraday"
 require "faraday_middleware"
 require "simplesol/version"
+require "simplesol/errors"
 require "simplesol/configuration"
 require "simplesol/client"
 

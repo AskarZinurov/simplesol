@@ -4,10 +4,10 @@ module Simplesol
   module Configuration
     VALID_OPTIONS_KEYS = [:login, :api_key, :debug, :api_server]
 
-    DEFAULT_LOGIN    = nil
-    DEFAULT_API_KEY = nil
-    DEFAULT_DEBUG    = true
-    DEFAULT_API_SERVER = 'http://api.sms.simplesol.ru'
+    DEFAULT_LOGIN      = nil
+    DEFAULT_API_KEY    = nil
+    DEFAULT_DEBUG      = true
+    DEFAULT_API_SERVER = 'http://api.gosmsinfo.ru/api'
 
     attr_accessor *VALID_OPTIONS_KEYS
 

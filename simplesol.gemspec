@@ -14,10 +14,13 @@ Gem::Specification.new do |gem|
   
   gem.add_development_dependency 'bundler'
   gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'vcr'
+  gem.add_development_dependency 'webmock'
   gem.add_runtime_dependency 'faraday'
   gem.add_runtime_dependency 'faraday_middleware'
   gem.add_runtime_dependency 'hashie'
   gem.add_runtime_dependency 'rash'
+  gem.add_runtime_dependency 'system_timer'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
