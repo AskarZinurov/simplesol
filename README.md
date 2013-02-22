@@ -55,7 +55,7 @@ Available commands
     ```
 For futher reading and testing please look at spec/simplesol_spec.rb
 
-Tested with ruby-1.8.7-p370.
+Tested with ruby-1.8.7-p370 and ruby-1.9.3-p327.
 
 ## Contributing
 
