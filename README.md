@@ -1,6 +1,5 @@
 # Simplesol
-
-TODO: Write a gem description
+Client gem for sms sending through http://simplesol.ru/.
 
 ## Installation
 
@@ -17,8 +16,46 @@ Or install it yourself as:
     $ gem install simplesol
 
 ## Usage
+Configure
 
-TODO: Write usage instructions here
+Create initializer like this config/simplesol.rb:
+
+```ruby
+  Simplesol.configure do |c|
+    c.login    = '<your username>'
+    c.api_key  = '<your api key>'
+  end
+  @client = Simplesol::Client.new
+```
+
+Available commands
+ 
+  - Sending message:
+
+    ```ruby
+      @client.send_message(['mobile1', 'mobile2'], 'Привет, как дела', { :sender => 'santa' })
+    ```
+  
+  - Get sms message status:
+    
+    ```ruby
+      @client.message_status(['message id'])
+    ``` 
+
+  - Get cost of message:
+     
+    ```ruby
+      @client.message_price(['mobile1', 'mobile2'], 'Привет, как дела')
+    ```
+
+  - Check account balance:
+     
+    ```ruby
+      @client.balance
+    ```
+For futher reading and testing please look at spec/simplesol_spec.rb
+
+Tested with ruby-1.8.7-p370.
 
 ## Contributing
 
