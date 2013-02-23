@@ -4,10 +4,15 @@ require 'digest/sha1'
 
 module Simplesol
   class Client
+    include Configuration
+
     attr_reader :connection
 
     def initialize
-      @connection = Faraday::Connection.new(:url => Simplesol.api_server) do |c|
+      reset
+      configure { yield(self) } if block_given?
+
+      @connection = Faraday::Connection.new(:url => api_server) do |c|
         c.request  :url_encoded
         c.response :rashify
         c.response :dates
@@ -44,17 +49,18 @@ module Simplesol
     private
 
     def call(url, params = {})
+      raise Simplesol::NotConfiguredError.new unless configured?
       signed_params = params.merge(calculate_sign(params))
-      signed_params.merge!(:user => Simplesol.login)
+      signed_params.merge!(:user => login)
       response = connection.post(url, signed_params).body
       raise Simplesol::Error.parse(response) if response.status == 'error'
       response
     end
 
     def calculate_sign(params)
-      str = [Simplesol.login]
+      str = [login]
       params.keys.map(&:to_s).sort.each {|k| str << params[k.to_sym] }
-      str << Simplesol.api_key
+      str << api_key
       { :sign => Digest::MD5.hexdigest(Digest::SHA1.hexdigest(str.compact.join(''))) }
     end
   end

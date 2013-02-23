@@ -11,8 +11,9 @@ module Simplesol
 
     attr_accessor *VALID_OPTIONS_KEYS
 
-    def self.extended(base)
-      base.reset
+    def configured?
+      status = login && api_key && api_server
+      !(status.nil? || status.empty?)
     end
 
     def configure

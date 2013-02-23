@@ -1,4 +1,10 @@
 module Simplesol
+  class NotConfiguredError < Exception
+    def initialize
+      @message = 'You have not provided Simplesol api settings: login or api_key'
+    end
+  end
+
   class Error < Exception
     attr_reader :code
 

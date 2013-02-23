@@ -18,16 +18,26 @@ Or install it yourself as:
 ## Usage
 Configure
 
-Create initializer like this config/simplesol.rb:
+Instantiate Client class with some config:
 
 ```ruby
-  Simplesol.configure do |c|
+  @client = Simplesol::Client.new do |c|
     c.login    = '<your username>'
     c.api_key  = '<your api key>'
   end
-  @client = Simplesol::Client.new
 ```
-
+or configure client later:
+```ruby
+  @client = Simplesol::Client.new
+  @client.configure do |c|
+    c.login    = '<your username>'
+    c.api_key  = '<your api key>'
+  end
+```
+or reset clients settings to defaults via:
+```ruby
+  @client.reset
+```
 Available commands
  
   - Sending message:

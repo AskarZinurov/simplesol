@@ -3,27 +3,47 @@ require 'helper'
 describe Simplesol do
   it 'should be configurable' do
     settings = { :login => 'login', :api_key => 'key', :api_server => 'server.ru' }
-    Simplesol.configure do |c|
+    client = Simplesol::Client.new do |c|
       c.login = settings[:login]
       c.api_key = settings[:api_key]
       c.api_server = settings[:api_server]
     end
 
     settings.each do |k, v|
-      Simplesol.send(k).should == v
+      client.send(k).should == v
     end
+  end
+
+  it 'should raise NotConfiguredError' do
+    client = Simplesol::Client.new
+    expect { client.balance }.to raise_error(Simplesol::NotConfiguredError)
+  end
+
+  it 'can be configured later' do
+    client = Simplesol::Client.new
+    client.configure do |c|
+      c.api_key = 'some'
+      c.login = 'settings'
+    end
+    client.should be_configured
+  end
+
+  it 'can reset settings to defaults' do
+    client = Simplesol::Client.new do |c|
+      c.login = 'sample login'
+    end
+    client.reset
+    client.login.should == Simplesol::Configuration::DEFAULT_LOGIN
   end
 
   context 'in error scope' do
     use_vcr_cassette 'simplesol_errors'
 
     before :all do
-      Simplesol.reset
-      Simplesol.configure do |c|
+      @wrong_client = Simplesol::Client.new do |c|
         c.login = '555555'
         c.api_key = 'wrong'
       end
-      @wrong_client = Simplesol::Client.new
     end
 
     it 'raise signature error' do
@@ -31,18 +51,19 @@ describe Simplesol do
     end
   end
 
+  # This context actually send requests to api and records them to vcr casette,
+  # so you should provide your actual api login and api key to run them properly.
+  # Btw this context does not change your balance - all sms sending runs in test mode.
 =begin
   context 'in general' do
     use_vcr_cassette 'simplesol'
 
     before :all do
-      Simplesol.reset
-      Simplesol.configure do |c|
+      @test_mobile_number = '<your mobile number>'
+      @client = Simplesol::Client.new do |c|
         c.login = '<your login>'
-        c.api_key = '<your code>'
+        c.api_key = '<your api key>'
       end
-      @test_mobile_number = '' #'+79033144333'
-      @client = Simplesol::Client.new
     end
 
     it 'can fetch balance' do

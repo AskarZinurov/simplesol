@@ -5,38 +5,38 @@ http_interactions:
     method: post
     uri: http://api.gosmsinfo.ru/api/user/balance
     body: 
-      string: user=555555&sign=a6d969ddce2b9aeff22f403e0d67928a
+      string: sign=a6d969ddce2b9aeff22f403e0d67928a&user=555555
     headers: 
-      Content-Type: 
-      - application/x-www-form-urlencoded
       Accept: 
       - "*/*"
+      Content-Type: 
+      - application/x-www-form-urlencoded
   response: 
     status: 
       code: 200
       message: OK
     headers: 
+      Transfer-Encoding: 
+      - chunked
+      Date: 
+      - Sat, 23 Feb 2013 10:18:48 GMT
+      Pragma: 
+      - no-cache
       Expires: 
       - Thu, 19 Nov 1981 08:52:00 GMT
       Set-Cookie: 
-      - PHPSESSID=1tdh2a1ln3k3lg634uomn6pkk3; path=/
-      Content-Type: 
-      - text/html
-      Pragma: 
-      - no-cache
-      Date: 
-      - Fri, 22 Feb 2013 15:00:06 GMT
-      Cache-Control: 
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-      Transfer-Encoding: 
-      - chunked
-      Server: 
-      - nginx/1.1.19
-      X-Powered-By: 
-      - PHP/5.3.10-1ubuntu3.4
+      - PHPSESSID=7dmop50sclmndja36gds4gs693; path=/
       Connection: 
       - keep-alive
+      X-Powered-By: 
+      - PHP/5.3.10-1ubuntu3.4
+      Content-Type: 
+      - text/html
+      Cache-Control: 
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Server: 
+      - nginx/1.1.19
     body: 
       string: " {\"status\":\"error\",\"error\":2,\"message\":\"invalid signature\"}"
     http_version: 
-  recorded_at: Fri, 22 Feb 2013 15:00:06 GMT
+  recorded_at: Sat, 23 Feb 2013 10:18:48 GMT
