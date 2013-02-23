@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["mail@asktim.ru"]
   gem.description   = %q{SimpleSol service client gem}
   gem.summary       = %q{Gem for working with sms.simplesol.ru}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/AskarZinurov/simplesol"
   
   gem.add_development_dependency 'bundler'
   gem.add_development_dependency 'rspec'
