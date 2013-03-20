@@ -15,7 +15,7 @@ module Simplesol
 
     def self.parse(response)
       if response.error
-        Simplesol::ERRORS[response.error-1].new response
+        Simplesol::ERRORS[response.error].new response
       else
         Exception.new('error cannot be parsed')
       end
@@ -28,15 +28,36 @@ module Simplesol
   class InvalidSignatureError < Error
   end
 
-  class EmptyMessageError < Error
+  class InvalidApiComponentError < Error
   end
 
-  class IncorrectRecipientsListError < Error
+  class InvalidApiComponentMethodError < Error
+  end
+
+  class InvalidRecipientsError < Error
+  end
+
+  class MessageIsEmptyError < Error
+  end
+
+  class SenderIsEmptyError < Error
   end
 
   class NotEnoughMoneyError < Error
   end
 
-  ERRORS = [InvalidUserError, InvalidSignatureError, EmptyMessageError,
-    IncorrectRecipientsListError, NotEnoughMoneyError]
+  class InvalidMessageIdError < Error
+  end
+
+  ERRORS = {
+    1 => InvalidUserError,
+    2 => InvalidSignatureError,
+    4 => InvalidApiComponentError,
+    5 => InvalidApiComponentMethodError,
+    6 => InvalidRecipientsError,
+    7 => MessageIsEmptyError,
+    8 => SenderIsEmptyError,
+    9 => NotEnoughMoneyError,
+    10 => InvalidMessageIdError
+  }
 end

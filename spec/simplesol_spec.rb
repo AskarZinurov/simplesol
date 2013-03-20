@@ -49,6 +49,14 @@ describe Simplesol do
     it 'raise signature error' do
       expect { @wrong_client.balance }.to raise_error(Simplesol::InvalidSignatureError)
     end
+
+    Simplesol::ERRORS.each do |code, error|
+      it "should raise #{error} when code is #{code}" do
+        response = double(:status => 'error', :error => code, :message => 'error message')
+        @wrong_client.connection.stub(:post).and_return(double(:body => response))
+        expect { @wrong_client.balance }.to raise_error(error)
+      end
+    end
   end
 
   # This context actually send requests to api and records them to vcr casette,
